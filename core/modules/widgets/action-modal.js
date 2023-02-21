@@ -1,8 +1,3 @@
-module-type: widget
-tags: 
-title: $:/core/modules/widgets/action-modal.js
-type: application/javascript
-
 /*\
 title: $:/core/modules/widgets/action-modal.js
 type: application/javascript
