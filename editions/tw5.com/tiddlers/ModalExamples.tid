@@ -24,7 +24,7 @@ Your name: <$edit-text tiddler="$:/temp/yourName" tag="input" placeholder="Your 
 * [[$:/core/modules/widgets/action-modal.js]]
 * [[$:/core/ui/PageTemplate/modals]]
 * [[$:/core/ui/PageTemplate]]
-** [[$:/yaisog/ui/PageTemplate/MessageHandler/tm-wikimodal]]
+** [[$:/core/ui/PageTemplate/MessageHandler/tm-wikimodal]]
 * [[$:/tags/ModalTemplateFilter]]
 * [[$:/core/ui/ModalTemplate]]
 * [[$:/core/ui/ModalTemplate/legacy]]
