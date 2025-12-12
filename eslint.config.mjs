@@ -34,6 +34,7 @@ export default defineConfig([{
         "core/modules/utils/diff-match-patch/diff_match_patch.js",
         "core/modules/utils/diff-match-patch/diff_match_patch_uncompressed.js",
         "core/modules/utils/dom/csscolorparser.js",
+        "core/modules/utils/observable-plot/**",
         "plugins/tiddlywiki/*/files/",
         "eslint.config.mjs",
         "playwright.config.js",

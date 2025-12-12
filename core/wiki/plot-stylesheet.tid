@@ -1,0 +1,16 @@
+created: 20251122092132996
+modified: 20251122120259336
+revision: 0
+tags: $:/tags/Stylesheet
+title: $:/yaisog/plot/StyleSheet
+type: text/vnd.tiddlywiki
+
+.tc-plot-widget {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.yc-plot-legend-swatches {
+    font-size: 14px;
+}
