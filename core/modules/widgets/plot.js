@@ -74,6 +74,20 @@ PlotWidget.prototype.execute = function() {
 	this.plotWidth = this.getAttribute("width", "960");
 	this.plotHeight = this.getAttribute("height", "540");
 
+	// Handle parameters - can be a string (single value) or JSON array
+	const parametersString = this.getAttribute("parameters", "");
+	if(parametersString) {
+		try {
+			const parsed = JSON.parse(parametersString);
+			this.parameters = Array.isArray(parsed) ? parsed : [parsed];
+		} catch(e) {
+			// If not valid JSON, treat as single string parameter
+			this.parameters = [parametersString];
+		}
+	} else {
+		this.parameters = undefined;
+	}
+
 	// Handle numberFormat - can be a string or JSON array [xFormat, yFormat]
 	const formatString = this.getAttribute("numberFormat", ".3s");
 	try {
@@ -88,7 +102,6 @@ PlotWidget.prototype.execute = function() {
 	} catch(e) {
 		this.numberFormatX = formatString;
 		this.numberFormatY = formatString;
-
 	}
 	const xLim = this.getAttribute("xlim", "");
 	try {
@@ -153,7 +166,8 @@ PlotWidget.prototype.renderPlot = function(container) {
 		plotLegend: this.plotLegend,
 		numberFormatX: this.numberFormatX,
 		numberFormatY: this.numberFormatY,
-		colorScheme: "Observable10"
+		colorScheme: "Observable10",
+		parameters: this.parameters
 	};
 
 	try {
