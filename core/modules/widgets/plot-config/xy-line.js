@@ -23,10 +23,9 @@ exports.config = function(Plot, d3, data, options) {
 	const xUnit = extractUnit(options.xLabel);
 	const yUnit = extractUnit(options.yLabel);
 
-	// Get the color domain order
-	const colorOrder = [...new Set(data.map(d => d.ID))];
+	// Sammle alle vorhandenen IDs (Serien) in der Reihenfolge ihres ersten Auftretens
+	const seriesIDs = [...new Set(data.map(d => d.ID))];
 
-	// Wir zeigen die Y-Werte *aller* Kurven an, wenn diese einen Punkt an der X-Position des Cursors haben
 	config.marks.push(
 		Plot.ruleX(
 			data,
@@ -37,16 +36,22 @@ exports.config = function(Plot, d3, data, options) {
 				strokeDasharray: "5,5"
 			})
 		),
-		Plot.dot(
-			data,
-			Plot.pointerX({
-				x: "x",
-				y: "y",
-				stroke: "ID",
-				strokeWidth: 2,
-				r: 4
-			})
+		// Für jede Kurve einen eigenen dot-Marker, damit alle Schnittpunkte mit der Vertikalen angezeigt werden
+		...seriesIDs.map(id => 
+			Plot.dot(
+				data.filter(d => d.ID === id),
+				Plot.pointerX({
+					x: "x",
+					y: "y",
+					fill: "ID",
+					stroke: "white",
+					strokeWidth: 1.5,
+					r: 4,
+					clip: true
+				})
+			)
 		),
+		// Wir zeigen die Y-Werte *aller* Kurven an, wenn diese einen Punkt an der X-Position des Cursors haben
 		Plot.text(
 			data,
 			Plot.pointerX({
@@ -59,10 +64,10 @@ exports.config = function(Plot, d3, data, options) {
 				text: d => {
 					const x = d.x;
 					const matches = data.filter(row => row.x === x);
-					// Sort by color domain order
+					// Sortiere nach Serien-Reihenfolge
 					const byID = matches.sort((a, b) => {
-						const indexA = colorOrder.indexOf(a.ID);
-						const indexB = colorOrder.indexOf(b.ID);
+						const indexA = seriesIDs.indexOf(a.ID);
+						const indexB = seriesIDs.indexOf(b.ID);
 						return indexA - indexB;
 					});
 					const xLabelWithoutUnit = (options.xLabel.replace(/\s*\[([^\]]+)\]$/, "") || "X");
