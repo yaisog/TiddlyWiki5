@@ -37,19 +37,18 @@ exports.config = function(Plot, d3, data, options) {
 			})
 		),
 		// Für jede Kurve einen eigenen dot-Marker, damit alle Schnittpunkte mit der Vertikalen angezeigt werden
-		...seriesIDs.map(id => 
-			Plot.dot(
-				data.filter(d => d.ID === id),
-				Plot.pointerX({
-					x: "x",
-					y: "y",
-					fill: "ID",
-					stroke: "white",
-					strokeWidth: 1.5,
-					r: 4,
-					clip: true
-				})
-			)
+		...seriesIDs.map(id => Plot.dot(
+			data.filter(d => d.ID === id),
+			Plot.pointerX({
+				x: "x",
+				y: "y",
+				fill: "ID",
+				stroke: "white",
+				strokeWidth: 1.5,
+				r: 4,
+				clip: true
+			})
+		)
 		),
 		// Wir zeigen die Y-Werte *aller* Kurven an, wenn diese einen Punkt an der X-Position des Cursors haben
 		Plot.text(
