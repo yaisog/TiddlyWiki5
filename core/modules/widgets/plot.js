@@ -122,7 +122,7 @@ PlotWidget.prototype.execute = function() {
 		this.data = JSON.parse(this.plotData);
 	} catch(e) {
 		this.data = [];
-		this.configError = "No data";
+		this.configError = "Invalid JSON plot data: " + e.message;
 	}
 
 	if(!this.configError) {
